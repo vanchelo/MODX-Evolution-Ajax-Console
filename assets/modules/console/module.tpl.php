@@ -7,7 +7,9 @@ if (!defined('IN_MANAGER_MODE')) {
     die;
 }
 
-define('MODX_API_MODE', true);
+if (!defined('MODX_API_MODE')) {
+	define('MODX_API_MODE', true);
+}
 
 require_once MODX_BASE_PATH . '/assets/modules/console/console.class.php';
 
