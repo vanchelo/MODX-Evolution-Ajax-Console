@@ -91,7 +91,7 @@ class Console
 
     protected function registerShutdownHandler()
     {
-        register_shutdown_function([$this, 'handleShutdown']);
+        register_shutdown_function(array($this, 'handleShutdown'));
     }
 
     protected function registerViewService()
@@ -129,7 +129,7 @@ class Console
         // Normalize properties
         $normalizer_name = 'normalize' . ucfirst($property);
         if (method_exists(__CLASS__, $normalizer_name)) {
-            $value = call_user_func([__CLASS__, $normalizer_name], $value);
+            $value = call_user_func(array(__CLASS__, $normalizer_name), $value);
         }
 
         $this->profile[$property] = $value;

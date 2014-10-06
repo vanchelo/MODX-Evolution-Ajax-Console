@@ -3,7 +3,7 @@
 class View
 {
     protected $viewsPath;
-    protected $data = [];
+    protected $data = array();
 
     function __construct($path = null)
     {
@@ -23,7 +23,7 @@ class View
      *
      * @return string
      */
-    public function render($template, $data = [])
+    public function render($template, $data = array())
     {
         try {
             $template = $this->preparePath($template);
