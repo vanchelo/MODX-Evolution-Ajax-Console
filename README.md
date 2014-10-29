@@ -21,7 +21,7 @@ AJAX Консоль для выполнения PHP кода в браузере
 require_once MODX_BASE_PATH . 'assets/modules/console/module.tpl.php';
 ```
 
-* Добавить список разрешенных / запрещенных IP адресов в assets/modules/config/config.php
+* Добавить список разрешенных / запрещенных IP адресов в assets/modules/console/config/config.php
 
 ```php
 /* ... */
