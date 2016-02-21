@@ -7,9 +7,9 @@ class AccessCheck
      */
     protected $console;
 
-    function __construct(Console & $console)
+    public function __construct(Console $console)
     {
-        $this->console =& $console;
+        $this->console = $console;
     }
 
     /**
@@ -29,9 +29,9 @@ class AccessCheck
         $ips = $config[$filter];
         $ip = $this->getUserIp();
 
-        if ($filter == 'whitelist' && in_array($ip, $ips)) {
+        if ($filter === 'whitelist' && in_array($ip, $ips)) {
             return true;
-        } elseif ($filter == 'blacklist' && !in_array($ip, $ips)) {
+        } elseif ($filter === 'blacklist' && !in_array($ip, $ips)) {
             return true;
         }
 
@@ -54,8 +54,6 @@ class AccessCheck
             $userIP = $_SERVER['HTTP_X_FORWARDED_FOR'];
         } elseif (isset($_SERVER['HTTP_X_FORWARDED']) && $_SERVER['HTTP_X_FORWARDED'] <> '') {
             $userIP = $_SERVER['HTTP_X_FORWARDED'];
-        } elseif (isset($_SERVER['HTTP_FORWARDED_FOR']) && $_SERVER['HTTP_FORWARDED_FOR'] <> '') {
-            $userIP = $_SERVER['HTTP_FORWARDED_FOR'];
         } elseif (isset($_SERVER['HTTP_FORWARDED_FOR']) && $_SERVER['HTTP_FORWARDED_FOR'] <> '') {
             $userIP = $_SERVER['HTTP_FORWARDED_FOR'];
         } else {

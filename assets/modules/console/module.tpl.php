@@ -1,4 +1,7 @@
 <?php
+
+/** @var DocumentParser $modx */
+
 if (!defined('MODX_START_TIME')) {
     define('MODX_START_TIME', microtime(1));
 }
@@ -8,7 +11,7 @@ if (!defined('IN_MANAGER_MODE')) {
 }
 
 if (!defined('MODX_API_MODE')) {
-	define('MODX_API_MODE', true);
+    define('MODX_API_MODE', true);
 }
 
 require_once MODX_BASE_PATH . '/assets/modules/console/console.class.php';

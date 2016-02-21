@@ -15,25 +15,25 @@
     <script type="text/javascript" src="<?= $path ?>assets/js/vendor/modernizr.js"></script>
 </head>
 <body>
-    <div id="console" class="console" data-action="">
-        <ul id="response" class="response"></ul>
+<div id="console" class="console" data-action="">
+    <ul id="response" class="response"></ul>
 
-        <nav id="controlbar" class="controlbar">
-            <ul id="controls" class="controls"></ul>
+    <nav id="controlbar" class="controlbar">
+        <ul id="controls" class="controls"></ul>
 
-            <div id="execute" class="execute">Execute</div>
-        </nav>
+        <div id="execute" class="execute">Execute</div>
+    </nav>
 
-        <section id="editor" class="editor">
-        </section>
-    </div>
+    <section id="editor" class="editor">
+    </section>
+</div>
 
-    <?= $this->render('partials.templates') ?>
+<?= $this->render('partials.templates') ?>
 
-    <script type="text/javascript" src="<?= $path ?>assets/js/vendor/jquery.js"></script>
-    <script type="text/javascript" src="<?= $path ?>assets/js/vendor/plugins.js"></script>
-    <script type="text/javascript" src="<?= $path ?>assets/js/vendor/codemirror.js"></script>
-    <script type="text/javascript" src="<?= $path ?>assets/js/main.js"></script>
+<script type="text/javascript" src="<?= $path ?>assets/js/vendor/jquery.js"></script>
+<script type="text/javascript" src="<?= $path ?>assets/js/vendor/plugins.js"></script>
+<script type="text/javascript" src="<?= $path ?>assets/js/vendor/codemirror.js"></script>
+<script type="text/javascript" src="<?= $path ?>assets/js/main.js"></script>
 </body>
 </html>
 

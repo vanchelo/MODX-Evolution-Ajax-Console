@@ -43,9 +43,16 @@ class Console
         'time_total' => 0,
         'output' => '',
         'output_size' => 0,
-        'error' => false
+        'error' => false,
     );
-
+    /**
+     * @var array Config
+     */
+    public $config;
+    /**
+     * @var View
+     */
+    public $view;
     /**
      * The application instance.
      *
@@ -57,19 +64,14 @@ class Console
      */
     protected $access;
     /**
-     * @var array Config
+     * @var string
      */
-    public $config;
-    /**
-     * @var View
-     */
-    public $view;
     protected $path;
 
     /**
      * Create a new service provider instance
      *
-     * @param  DocumentParser $modx
+     * @param DocumentParser $modx
      */
     public function __construct(DocumentParser & $modx)
     {
@@ -78,33 +80,44 @@ class Console
         $this->registerConfig();
         $this->registerConsoleAccessService();
 
-        if (!$this->access->check())
-        {
+        if (!$this->access->check()) {
             die('Access denied');
         }
 
         $this->path = str_replace(MODX_BASE_PATH, '/', str_replace('\\', '/', __DIR__)) . '/';
 
         $this->registerViewService();
-		$this->registerShutdownHandler();
+        $this->registerShutdownHandler();
     }
 
+    /**
+     *
+     */
     protected function registerShutdownHandler()
     {
         register_shutdown_function(array($this, 'handleShutdown'));
     }
 
+    /**
+     *
+     */
     protected function registerViewService()
     {
         $this->view = new View($this->config['viewsDir']);
         $this->view->share('path', $this->path);
     }
 
+    /**
+     *
+     */
     protected function registerConfig()
     {
         $this->config = require __DIR__ . '/config/config.php';
     }
 
+    /**
+     *
+     */
     protected function registerConsoleAccessService()
     {
         $this->access = new $this->config['check_access_class']($this);
@@ -114,7 +127,7 @@ class Console
      * Adds one or multiple fields into profile.
      *
      * @param mixed $property Property name, or an array of name => value pairs.
-     * @param mixed $value Property value.
+     * @param mixed $value    Property value.
      */
     public function addProfile($property, $value = null)
     {
@@ -152,6 +165,9 @@ class Console
         return $this->profile;
     }
 
+    /**
+     * @return null
+     */
     public function handleShutdown()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -166,7 +182,7 @@ class Console
     /**
      * Executes a code and returns current profile.
      *
-     * @param  string $code
+     * @param string $code
      *
      * @return array
      */
@@ -186,26 +202,28 @@ class Console
         $this->addProfile(array(
             'time' => round(($console_execute_end - $console_execute_start) * 1000),
             'output' => $output,
-            'output_size' => strlen($output)
+            'output_size' => strlen($output),
         ));
     }
 
     /**
      * Normalizes error profile.
      *
-     * @param  mixed $error Error object or array.
-     * @param  int $type
+     * @param mixed $error Error object or array.
+     * @param int   $type
      *
      * @return array|bool Normalized error array.
      */
     public function normalizeError($error, $type = 0)
     {
         // Set human readable error type
-        if (isset($error['type']) && isset($this->error_map[$error['type']])) {
+        if (isset($error['type'], $this->error_map[$error['type']])) {
             $error['type'] = $this->error_map[$error['type']];
         }
 
-        if ($error['type'] == 'E_DEPRECATED') return false;
+        if ($error['type'] === 'E_DEPRECATED') {
+            return false;
+        }
 
         // Validate and return the error
         if (isset($error['type'], $error['message'], $error['file'], $error['line'])) {
