@@ -1,5 +1,4 @@
-Evolution Console
-===============
+# MODx Evolution Console
 
 Адаптированная под MODX Evolution https://github.com/darsain/laravel-console - Laravel 4 Console
 
@@ -14,7 +13,7 @@ AJAX Консоль для выполнения PHP кода в браузере
  DocumentParser
  ```
 
-##Установка
+## Установка
 * Скопировать содержимое папки `assets` в одноименную папку вашего сайта
 * Создать новый модуль с именем `Console` и след. содержимым:
 ```php
